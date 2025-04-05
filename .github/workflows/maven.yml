@@ -50,3 +50,10 @@ jobs:
     - name: Build with Maven
       # TEMP -Ddoclint=none
       run: mvn -V --file pom.xml --no-transfer-progress -Ddoclint=none
+      # Upload jar o nly on ubuuntu java 11
+    - name: "Upload jars"
+      if: ${{ matrix.java == 11 }}
+      uses: actions/upload-artifact@v4
+      with:
+        name: "jars"
+        path: "**/*.jar"
